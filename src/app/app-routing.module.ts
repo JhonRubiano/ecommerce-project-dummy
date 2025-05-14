@@ -1,16 +1,27 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { FeaturePage } from './features/features.page';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'features',
+    loadChildren: () => import('./features/features.module').then( m => m.FeatureModule)
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+      path: '',
+      redirectTo: 'features',
+      pathMatch: 'full'
   },
+  {
+    path: 'features',
+      component: FeaturePage,
+      children:[
+        {
+          path:'cart',
+          loadChildren: () => import('./features/cart/cart.module').then(m=>m.CartPageModule)
+        },
+      ]
+    }
 ];
 
 @NgModule({
