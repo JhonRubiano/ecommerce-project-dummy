@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { cart, pricetag, qrCode } from 'ionicons/icons';
+import { CartFacade } from '../services/facades/cart.facade';
 
 @Component({
   selector: 'app-features',
@@ -8,12 +9,8 @@ import { cart, pricetag, qrCode } from 'ionicons/icons';
   styleUrls: ['features.page.scss'],
   standalone: false,
 })
-export class FeaturePage implements OnInit{
-  cartCount = 0;
+export class FeaturePage{
+  totalQuantity$ = this.cartFacade.totalQuantity$
 
-  constructor() {}
-
-  ngOnInit() {
-    this.cartCount = 0;
-  }
+  constructor(private cartFacade: CartFacade) {}
 }

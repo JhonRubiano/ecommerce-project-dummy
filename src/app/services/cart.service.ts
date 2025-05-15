@@ -1,12 +1,6 @@
-import { BehaviorSubject } from "rxjs"
+import { BehaviorSubject, map } from "rxjs"
 import { Injectable } from "@angular/core"
-
-export interface CartItem {
-  id: string,
-  cost: number,
-  name: string
-}
-
+import { CartItem } from "../models/shopItem.model"
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +8,12 @@ export interface CartItem {
 export class CartService {
   private itemsSubject = new BehaviorSubject<CartItem[]>([])
   items$ = this.itemsSubject.asObservable()
+
+  get totalQuantity$() {
+    return this.items$.pipe(
+      map(items => items.reduce((acc,item) => acc + item.quantity,0))
+    )
+  }
 
   addItem (item: CartItem) {
     const items = this.itemsSubject.value
