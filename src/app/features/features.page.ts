@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { addIcons } from 'ionicons';
+import { cart, pricetag, qrCode } from 'ionicons/icons';
 
 @Component({
   selector: 'app-features',
@@ -6,6 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['features.page.scss'],
   standalone: false,
 })
-export class FeaturePage {
+export class FeaturePage implements OnInit{
+  cartCount = 0;
+
   constructor() {}
+
+  ngOnInit() {
+    this.cartCount = 0;
+  }
 }

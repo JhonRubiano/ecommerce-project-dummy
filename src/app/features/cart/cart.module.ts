@@ -1,18 +1,18 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+
 import { IonicModule } from "@ionic/angular";
 import { CartPage } from "./cart.page";
-import { CommonModule } from "@angular/common";
+import { CartPageRoutingModule } from "./cart-routing.module";
 
 @NgModule({
   declarations:[
     CartPage
   ],
   imports:[
+    IonicModule,
     CommonModule,
-    IonicModule
-  ],
-  exports:[
-    CartPage
+    CartPageRoutingModule
   ]
 })
 export class CartPageModule{}

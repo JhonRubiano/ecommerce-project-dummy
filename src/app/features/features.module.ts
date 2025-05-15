@@ -1,15 +1,21 @@
 import { NgModule } from "@angular/core";
-import { CartPageModule } from "./cart/cart.module";
-import { IonicModule } from "@ionic/angular";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { IonicModule } from "@ionic/angular";
+
 import { FeaturePageRoutingModule } from "./features-routing.module";
+
+import { FeaturePage } from "./features.page";
 
 @NgModule({
   imports:[
+    IonicModule,
     CommonModule,
-    FeaturePageRoutingModule,
-    CartPageModule,
-    IonicModule
+    // FormsModule,
+    FeaturePageRoutingModule
+  ],
+  declarations:[
+    FeaturePage
   ]
 })
 export class FeatureModule{}

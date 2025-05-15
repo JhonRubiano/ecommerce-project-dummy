@@ -6,6 +6,7 @@
     </ion-tab-button>
     <ion-tab-button tab="cart">
       <ion-icon name="cart"></ion-icon>
+      <ion-badge *ngIf="cartCount > 0" color="warning">{{ cartCount }}</ion-badge>
       Cart
     </ion-tab-button>
     <ion-tab-button tab="qr">
