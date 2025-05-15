@@ -18,15 +18,25 @@ export class CartPage implements OnInit{
       id: '1',
       name: 'Camiseta',
       price: 20000,
+      quantity: 5
+    })
+    this.cartFacade.add({
+      id: '4',
+      name: 'Camiseta Deportiva',
+      price: 45000,
       quantity: 1
     })
   }
 
-  remove (index: number) {
+  updateQuantity( index: number, quantity: number ) {
+    this.cartFacade.update(index,quantity)
+  }
+
+  removeProduct (index: number) {
     this.cartFacade.remove(index)
   }
 
-  clear () {
+  clearCart () {
     this.cartFacade.clear()
   }
 

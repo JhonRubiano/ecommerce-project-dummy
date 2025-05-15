@@ -8,12 +8,16 @@ import { CartItem } from "../../models/shopItem.model";
 })
 export class CartFacade {
   items$ = this.cartService.items$
-  totalQuantity$ = this.cartService.totalQuantity$
+  totalQuantity$ = this.cartService.getTotalQuantity$()
 
   constructor (private cartService: CartService) {}
 
   add (item: CartItem) {
     this.cartService.addItem(item)
+  }
+
+  update ( index: number, quantity:number ) {
+    this.cartService.updateQuantity(index, quantity)
   }
 
   remove (index: number) {
