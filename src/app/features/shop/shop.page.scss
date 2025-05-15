@@ -1,0 +1,42 @@
+.custom-swiper {
+    height: 200px;
+  
+    img {
+      width: 90%;
+      border-radius: 10px;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  .category-name {
+    position: absolute;
+    color: black;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    width: 100%;        
+}
+
+.button-add {
+    width: 100%;
+}
+
+ion-title {
+    text-align: center;
+}
+
+.selected {
+    background-color: #d4edda;
+    border: 1px solid #a4d7a1;
+    color: #155724;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .price {
+    font-weight: 600;
+    text-align: end;
+    font-size: 20px;
+  }

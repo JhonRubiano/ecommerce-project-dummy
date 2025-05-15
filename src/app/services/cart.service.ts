@@ -16,8 +16,9 @@ export class CartService {
   }
 
   addItem (item: CartItem) {
-    const items = this.itemsSubject.value
+    const items = this.itemsSubject.value;
     this.itemsSubject.next([...items,item])
+    console.log("Lista de items :::: ", this.itemsSubject.value);
   }
 
   removeItem (index: number) {

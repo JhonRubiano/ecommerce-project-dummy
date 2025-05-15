@@ -5,5 +5,38 @@
 </ion-header>
 
 <ion-content>
-  <div class="example-content">Welcome to the Shop page!</div>
+  <ion-toolbar>
+    <ion-title>Categorías</ion-title>
+  </ion-toolbar>
+
+  <swiper-container
+    #swiperEl
+    slides-per-view="1"
+    loop="true"
+    autoplay-delay="3000"
+    autoplay-disable-on-interaction="false"
+    navigation="true"
+    pagination="false"
+  >
+    <swiper-slide *ngFor="let category of categories">
+      <p class="category-name">{{category.name}}</p>
+      <img [src]="category.image" [alt]="category.name" (click)="getProducts(category.id)"/>
+    </swiper-slide>
+  </swiper-container>
+  <br />
+  <ion-toolbar *ngIf="products && products.length>0">
+    <ion-title>Productos - {{products[0].category.name}}</ion-title>
+  </ion-toolbar>
+  <ion-card *ngFor="let product of products" >
+    <ion-card-header [ngClass]="{ 'selected': product.selected }">
+      <ion-card-title>{{product.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content [ngClass]="{ 'selected': product.selected }">
+      <img [src]="product.images[0]" [alt]="product.title" (click)="getProducts(product.id)"/>
+      <p>{{product.description}}</p>
+      <p class="price">{{product.price}}€</p>
+      <p class="price">{{product.stock}} unidades</p>
+    </ion-card-content>
+    <ion-button class="button-add" (click)="addToCart(product)">Añadir al carrito</ion-button>
+  </ion-card>
 </ion-content>
