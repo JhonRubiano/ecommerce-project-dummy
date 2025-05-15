@@ -16,11 +16,6 @@ export class CartService {
   }
 
   addItem (item: CartItem) {
-<<<<<<< HEAD
-    const items = this.itemsSubject.value;
-    this.itemsSubject.next([...items,item])
-    console.log("Lista de items :::: ", this.itemsSubject.value);
-=======
     const items = this.itemsSubject.value
     const index = items.findIndex( i => i.id === item.id)
     if (index !== -1) {
@@ -39,7 +34,6 @@ export class CartService {
       items[index].quantity = quantity
     }
     this.itemsSubject.next(items)
->>>>>>> origin/main
   }
 
   removeItem (index: number) {
