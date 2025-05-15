@@ -9,7 +9,7 @@ export class CartService {
   private itemsSubject = new BehaviorSubject<CartItem[]>([])
   items$ = this.itemsSubject.asObservable()
 
-  get totalQuantity$() {
+  getTotalQuantity$() {
     return this.items$.pipe(
       map(items => items.reduce((acc,item) => acc + item.quantity,0))
     )
@@ -17,7 +17,23 @@ export class CartService {
 
   addItem (item: CartItem) {
     const items = this.itemsSubject.value
-    this.itemsSubject.next([...items,item])
+    const index = items.findIndex( i => i.id === item.id)
+    if (index !== -1) {
+      items[index].quantity += item.quantity
+      this.itemsSubject.next([...items,item])
+    } else {
+      this.itemsSubject.next([...items,item])
+    }
+  }
+
+  updateQuantity(index: number, quantity: number) {
+    const items = [ ...this.itemsSubject.value ]
+    if ( quantity <= 0) {
+      items.splice(index, 1)
+    } else {
+      items[index].quantity = quantity
+    }
+    this.itemsSubject.next(items)
   }
 
   removeItem (index: number) {
@@ -28,5 +44,11 @@ export class CartService {
 
   clear () {
     this.itemsSubject.next([])
+  }
+
+  getTotalPrice () {
+    return this.itemsSubject.pipe(
+      map(items => items.reduce((acc,{price,quantity})=>acc + (price * quantity),0))
+    )
   }
 }
