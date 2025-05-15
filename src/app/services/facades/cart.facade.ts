@@ -9,6 +9,7 @@ import { CartItem } from "../../models/shopItem.model";
 export class CartFacade {
   items$ = this.cartService.items$
   totalQuantity$ = this.cartService.getTotalQuantity$()
+  totalPrice$ = this.cartService.getTotalPrice()
 
   constructor (private cartService: CartService) {}
 

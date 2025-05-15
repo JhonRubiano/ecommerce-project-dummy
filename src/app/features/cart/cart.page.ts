@@ -8,6 +8,7 @@ import { CartFacade } from "src/app/services/facades/cart.facade";
 })
 export class CartPage implements OnInit{
   items$ = this.cartFacade.items$
+  total$ = this.cartFacade.totalPrice$
 
   constructor (
     private cartFacade: CartFacade

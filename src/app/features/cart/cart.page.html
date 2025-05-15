@@ -19,35 +19,45 @@
         </ion-card-header>
         <ion-card-content>
           <ion-list>
-            <ion-item
-            class="cart-product"
-            *ngFor="let product of products; let index = index"
-            lines="none"
-            >
-            <ion-thumbnail slot="start">
-              <img
-              alt="{{product.name}}"
-              src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
-              />
-            </ion-thumbnail>
-            <div class="cart-product-info">
+            <ion-item class="cart-product" *ngFor="let product of products; let index = index" lines="none">
+              <ion-thumbnail slot="start">
+                <img
+                alt="{{product.name}}"
+                src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
+                />
+              </ion-thumbnail>
+              <div class="cart-product-info">
+                <ion-label>
+                  <h2>
+                    {{ product.name }}
+                  </h2>
+                  <p>
+                    Total: $ {{product.quantity * product.price}}
+                  </p>
+                </ion-label>
+                <ion-buttons slot="end">
+                  <ion-button shape="round" (click)="updateQuantity(index,product.quantity - 1)"><ion-icon slot="icon-only" name="remove"></ion-icon></ion-button>
+                  <ion-badge>
+                    {{ product.quantity }}
+                  </ion-badge>
+                  <ion-button shape="round" (click)="updateQuantity(index,product.quantity + 1)"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
+                  <ion-button color="danger" (click)="removeProduct(index)">Eliminar</ion-button>
+                </ion-buttons>
+              </div>
+            </ion-item>
+            <ion-item>
               <ion-label>
-                <h2>
-                  {{ product.name }}
-                </h2>
-                <p>
-                  Total: $ {{product.quantity * product.price}}
-                </p>
+                <strong>
+                  Valor a pagar:
+                </strong>
               </ion-label>
-              <ion-buttons slot="end">
-                <ion-button shape="round" (click)="updateQuantity(index,product.quantity - 1)"><ion-icon slot="icon-only" name="remove"></ion-icon></ion-button>
-                <ion-badge>
-                  {{ product.quantity }}
-                </ion-badge>
-                <ion-button shape="round" (click)="updateQuantity(index,product.quantity + 1)"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
-              </ion-buttons>
-            </div>
-          </ion-item>
+              <ion-note slot="end" color="primary">
+                <strong>
+                  $ {{ total$ | async }}
+                </strong>
+              </ion-note>
+
+            </ion-item>
 
         </ion-list>
       </ion-card-content>

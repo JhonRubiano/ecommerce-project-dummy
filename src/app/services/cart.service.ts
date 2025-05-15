@@ -45,4 +45,10 @@ export class CartService {
   clear () {
     this.itemsSubject.next([])
   }
+
+  getTotalPrice () {
+    return this.itemsSubject.pipe(
+      map(items => items.reduce((acc,{price,quantity})=>acc + (price * quantity),0))
+    )
+  }
 }
