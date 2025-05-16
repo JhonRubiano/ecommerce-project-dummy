@@ -4,6 +4,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="example-content">Welcome to the QR page!</div>
+<ion-content class="ion-padding" style="display: flex; justify-content: center; align-items: center;">
+  <ion-button expand="block" (click)="scan()">Escanear QR</ion-button>
+
+  <ion-card *ngIf="scanResult">
+    <ion-card-header>
+      <ion-card-title>Resultado</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="color: white;">
+      {{ scanResult }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
