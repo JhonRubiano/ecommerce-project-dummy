@@ -1,7 +1,8 @@
 export interface ShopItem {
   id: string
-  name: string
+  title: string
   price: number
+  images: string[]
 }
 
 export interface CartItem extends ShopItem {

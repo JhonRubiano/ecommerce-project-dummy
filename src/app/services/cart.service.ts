@@ -46,6 +46,21 @@ export class CartService {
     this.itemsSubject.next([])
   }
 
+  getIndexById (id: string) {
+    const items = this.itemsSubject.value
+    return items.findIndex(item => item.id === id)
+  }
+
+  getProductById (id: string) {
+    const items = this.itemsSubject.value
+    return items.find(item => item.id === id)
+  }
+
+  obtainQuantityById (id: string) {
+    const items = this.itemsSubject.value
+    return items.find(item => item.id === id)?.quantity || 0
+  }
+
   getTotalPrice () {
     return this.itemsSubject.pipe(
       map(items => items.reduce((acc,{price,quantity})=>acc + (price * quantity),0))

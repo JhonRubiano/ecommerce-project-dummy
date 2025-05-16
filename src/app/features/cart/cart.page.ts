@@ -15,18 +15,6 @@ export class CartPage implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.cartFacade.add({
-      id: '1',
-      name: 'Camiseta',
-      price: 20000,
-      quantity: 5
-    })
-    this.cartFacade.add({
-      id: '4',
-      name: 'Camiseta Deportiva',
-      price: 45000,
-      quantity: 1
-    })
   }
 
   updateQuantity( index: number, quantity: number ) {

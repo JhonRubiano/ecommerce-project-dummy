@@ -24,7 +24,20 @@ export class CartFacade {
   remove (index: number) {
     this.cartService.removeItem(index)
   }
+
   clear () {
     this.cartService.clear()
+  }
+
+  getProductById (id: string) {
+    return this.cartService.getProductById(id)
+  }
+
+  getIndexById (id: string) {
+    return this.cartService.getIndexById(id)
+  }
+
+  obtainQuantityById (id: string) {
+    return this.cartService.obtainQuantityById(id)
   }
 }

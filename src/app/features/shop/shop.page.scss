@@ -11,9 +11,11 @@
   }
 
   .category-name {
+    top: -15px;
     position: absolute;
     color: black;
-    font-weight: 600;
+    font-weight: 900;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     width: 100%;        
@@ -24,7 +26,24 @@
 }
 
 ion-title {
+    background-color: #151f57;
     text-align: center;
+}
+
+ion-label {
+    background-color: #151f57;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    height: auto;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 10px;
+}
+
+ion-toolbar {
+    --background: #151f57;
 }
 
 .selected {
@@ -39,4 +58,8 @@ ion-title {
     font-weight: 600;
     text-align: end;
     font-size: 20px;
+  }
+
+  .title-selected {
+    color: black;
   }

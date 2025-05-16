@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-toolbar>
     <ion-title>Categorías</ion-title>
   </ion-toolbar>
@@ -17,19 +17,24 @@
     autoplay-disable-on-interaction="false"
     navigation="true"
     pagination="false"
+    preventClicks="false"
+    preventClicksPropagation="false"
   >
     <swiper-slide *ngFor="let category of categories">
       <p class="category-name">{{category.name}}</p>
       <img [src]="category.image" [alt]="category.name" (click)="getProducts(category.id)"/>
     </swiper-slide>
   </swiper-container>
-  <br />
-  <ion-toolbar *ngIf="products && products.length>0">
+  <br />  
+  <ion-toolbar *ngIf="products && products.length == 0 && categorySelected">
+    <ion-label>Esta categoria no cuenta con productos disponibles, por favor use una nueva categoría</ion-label>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="products && products.length > 0">
     <ion-title>Productos - {{products[0].category.name}}</ion-title>
   </ion-toolbar>
   <ion-card *ngFor="let product of products" >
     <ion-card-header [ngClass]="{ 'selected': product.selected }">
-      <ion-card-title>{{product.title}}</ion-card-title>
+      <ion-card-title [ngClass]="{ 'title-selected': product.selected }">{{product.title}}</ion-card-title>
     </ion-card-header>
     <ion-card-content [ngClass]="{ 'selected': product.selected }">
       <img [src]="product.images[0]" [alt]="product.title" (click)="getProducts(product.id)"/>
@@ -37,6 +42,39 @@
       <p class="price">{{product.price}}€</p>
       <p class="price">{{product.stock}} unidades</p>
     </ion-card-content>
-    <ion-button class="button-add" (click)="addToCart(product)">Añadir al carrito</ion-button>
+    <ion-button class="button-add" id="open-modal" expand="block" (click)="openModal(product)">{{product.quantity === 0 ? 'Añadir al carrito' : 'Modificar Cantidad ('+product.quantity+' añadido'+(product.quantity > 1?'s)': ')')}}</ion-button>
   </ion-card>
+  
+  <ion-modal [isOpen]="isModalOpen" [initialBreakpoint]="0.15" [breakpoints]="[0, 0.15]" (didDismiss)="onModalDismiss()" [showBackdrop]="true" [animated]="true" [backdropDismiss]="true">
+    <ng-template>
+      <ion-content>
+        <ion-list>
+          <ion-item *ngIf="selectedProduct">
+            <ion-avatar slot="start">
+              <ion-img [src]="selectedProduct?.images[0]"></ion-img>
+            </ion-avatar>
+
+            <div class="cart-product-info">
+              <ion-label>
+                <h2>
+                  {{ selectedProduct.title }}
+                </h2>
+                <p>
+                  Total: $ {{selectedProduct.quantity * selectedProduct.price}}
+                </p>
+              </ion-label>
+              <ion-buttons slot="end">
+                <ion-button shape="round" (click)="updateQuantity(selectedProduct.id, selectedProduct.quantity - 1)" [disabled]="selectedProduct.quantity <= 1"><ion-icon slot="icon-only" name="remove"></ion-icon></ion-button>
+                <ion-badge>
+                {{selectedProduct.quantity}}
+                </ion-badge>
+                <ion-button shape="round" (click)="updateQuantity(selectedProduct.id, selectedProduct.quantity + 1)"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
+                <ion-button color="danger" (click)="removeProduct(selectedProduct.id)">Eliminar</ion-button>
+              </ion-buttons>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
